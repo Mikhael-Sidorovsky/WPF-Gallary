@@ -1,0 +1,65 @@
+﻿<Window x:Class="Gallery.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gallery"
+        mc:Ignorable="d"
+        Title="Gallary" Height="450" Width="800" Background="Green" WindowStartupLocation="CenterScreen" Icon="../gallery.ico">
+    <Window.Resources>
+        <ResourceDictionary Source="../Themes/Styles.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="279*"></ColumnDefinition>
+            <ColumnDefinition Width="216*"/>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="247*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Source="{Binding Path=Image}" Grid.ColumnSpan="2"/>
+        <Slider Grid.Column="2" Name="slider" Maximum="{Binding SliderMaxValue}" Value="{Binding currentImagesIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label x:Name="information" Margin="10" Content="{Binding ImageDescription}"/>
+            <StackPanel Grid.Row="1">
+                <Label>Image mark:</Label>
+                <RadioButton GroupName="marks" Content="5 (Perfect)" IsChecked="{Binding Path=CurrentMark, 
+                    Converter={StaticResource boolToStringConverter}, ConverterParameter=5, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <RadioButton GroupName="marks" Content="4 (Good)" IsChecked="{Binding Path=CurrentMark, 
+                    Converter={StaticResource boolToStringConverter}, ConverterParameter=4, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton GroupName="marks" Content="3 (Normal)" IsChecked="{Binding Path=CurrentMark, 
+                    Converter={StaticResource boolToStringConverter}, ConverterParameter=3, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton GroupName="marks" Content="2 (Bad)" IsChecked="{Binding Path=CurrentMark, 
+                    Converter={StaticResource boolToStringConverter}, ConverterParameter=2, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton GroupName="marks" Content="1 (Awful)" IsChecked="{Binding Path=CurrentMark, 
+                    Converter={StaticResource boolToStringConverter}, ConverterParameter=1, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="first" Content="First" Command="{Binding FirstCommand}"/>
+            <Button Grid.Column="1" x:Name="previous" Content="Previous" Command="{Binding PreviousCommand}"/>
+            <Button Grid.Column="2" x:Name="next" Content="Next" Command="{Binding NextCommand}"/>
+            <Button Grid.Column="3" x:Name="last" Content="Last" Command="{Binding LastCommand}"/>
+            <Button Grid.Column="4" x:Name="exit" Content="Exit" Command="{Binding ExitCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

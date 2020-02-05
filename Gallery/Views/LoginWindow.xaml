@@ -1,0 +1,36 @@
+﻿<Window x:Class="Gallery.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gallery.Views"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"        
+        Title="Login" Height="250" Width="600" Background="Green" ResizeMode="NoResize" Icon="../Login.ico" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary Source="../Themes/LoginAndRegistrationStyle.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label>Email: </Label>
+        <TextBox Grid.Column="1" x:Name="login" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="1">Password:</Label>
+        <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="password">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
+        <Button Grid.Row="2" Grid.Column="1" Content="Log in" IsDefault="True" Command="{Binding Path=LoginCommand}"/>
+        <Button Grid.Row="2" Content="Go to registration" Command="{Binding Path=RegistrationCommand}"/>
+    </Grid>
+</Window>
